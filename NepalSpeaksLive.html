@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepal Speaks — नेपाल बोल्छ · Your voice reaches home</title>
+<meta name="description" content="A civic platform where every Nepali — at home or abroad — can propose ideas, vote on priorities, and push for real change. Distance shouldn't mean silence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300..800&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Nepal Speaks — Landing site · "Dawn over the Himalaya"
+   Now multilingual: English · नेपाली · 简体中文 · 繁體中文
+   CJK falls back to clean system serif/sans so headings and
+   body stay intentional in every language.
+   ============================================================ */
+
+:root{
+  --night:#0c1230; --night-2:#131b46; --indigo:#1f2a5e;
+  --crimson:#c0392b; --crimson-deep:#9a2a20; --crimson-soft:#fdf0ef;
+  --gold:#e6a857; --gold-soft:#f5e6cf; --snow:#f7f5f0;
+  --paper:#faf8f4; --paper-2:#f2ede5; --line:#e4ddd2;
+  --ink:#17130f; --ink-2:#5c554c; --ink-3:#938a7e;
+
+  --font-display:'Marcellus', 'Songti SC','Noto Serif CJK SC','Noto Serif SC', STSong, 'SimSun', Georgia, serif;
+  --font-deva:'Noto Serif Devanagari', 'Marcellus', serif;
+  --font-body:'Plus Jakarta Sans', system-ui, 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC', sans-serif;
+
+  --step--1:clamp(.8rem,.76rem + .2vw,.9rem);
+  --step-0:clamp(1rem,.95rem + .25vw,1.125rem);
+  --step-1:clamp(1.2rem,1.1rem + .5vw,1.45rem);
+  --step-2:clamp(1.6rem,1.35rem + 1.1vw,2.35rem);
+  --step-3:clamp(2.3rem,1.7rem + 2.8vw,4rem);
+  --step-4:clamp(3rem,2rem + 5vw,6rem);
+
+  --wrap:1140px; --gut:clamp(1.25rem,5vw,4rem);
+  --r:14px; --r-lg:22px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body{ font-family:var(--font-body); font-size:var(--step-0); line-height:1.65; color:var(--ink); background:var(--paper); overflow-x:hidden; }
+img,svg{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3{ font-family:var(--font-display); font-weight:400; line-height:1.05; letter-spacing:.005em; }
+.deva{ font-family:var(--font-deva); }
+:focus-visible{ outline:2.5px solid var(--gold); outline-offset:3px; border-radius:6px; }
+
+.wrap{ width:min(var(--wrap), 100% - var(--gut)*2); margin-inline:auto; }
+.eyebrow{ display:inline-flex; align-items:center; gap:.6rem; font-family:var(--font-body); font-size:var(--step--1); font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--crimson); }
+.pennant{ width:15px; height:18px; flex:none; }
+.pennant path{ fill:var(--crimson); }
+
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ── HEADER ── */
+.site-head{ position:fixed; inset:0 0 auto 0; z-index:60; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem var(--gut); transition:background .4s var(--ease), backdrop-filter .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease); border-bottom:1px solid transparent; }
+.site-head.solid{ background:color-mix(in srgb, var(--night) 86%, transparent); backdrop-filter:blur(12px) saturate(1.2); border-bottom-color:rgba(255,255,255,.08); padding-block:.85rem; }
+.brand{ display:flex; align-items:center; gap:.62rem; color:#fff; flex:none; }
+.brand-mark{ width:34px; height:34px; flex:none; }
+.brand-name{ font-family:var(--font-display); font-size:1.22rem; letter-spacing:.02em; }
+.brand-name b{ font-weight:400; color:var(--gold); }
+.head-actions{ display:flex; align-items:center; gap:.5rem; }
+.btn{ font-family:var(--font-body); font-weight:600; font-size:var(--step--1); display:inline-flex; align-items:center; gap:.5rem; padding:.72rem 1.15rem; border-radius:999px; border:1px solid transparent; cursor:pointer; transition:transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease); white-space:nowrap; }
+.btn svg{ width:16px; height:16px; flex:none; }
+.btn-primary{ background:var(--crimson); color:#fff; box-shadow:0 6px 20px -6px rgba(192,57,43,.6); }
+.btn-primary:hover{ background:var(--crimson-deep); transform:translateY(-2px); box-shadow:0 12px 28px -8px rgba(192,57,43,.7); }
+.btn-ghost-light{ color:#fff; border-color:rgba(255,255,255,.32); }
+.btn-ghost-light:hover{ background:rgba(255,255,255,.1); transform:translateY(-2px); }
+.btn-lg{ padding:.95rem 1.6rem; font-size:var(--step-0); }
+.head-link{ color:rgba(255,255,255,.85); font-size:var(--step--1); font-weight:600; padding:.5rem .4rem; }
+.head-link:hover{ color:#fff; }
+@media(max-width:760px){ .head-link{ display:none; } }
+
+/* ── LANGUAGE SWITCHER ── */
+.lang{ position:relative; flex:none; }
+.lang-btn{ display:inline-flex; align-items:center; gap:.4rem; padding:.55rem .7rem; border-radius:999px; border:1px solid rgba(255,255,255,.3); color:#fff; font-family:var(--font-body); font-weight:600; font-size:var(--step--1); transition:background .25s var(--ease), border-color .25s var(--ease); }
+.lang-btn:hover{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.5); }
+.lang-btn .globe{ width:17px; height:17px; }
+.lang-btn .chev{ width:13px; height:13px; opacity:.8; transition:transform .25s var(--ease); }
+.lang.open .chev{ transform:rotate(180deg); }
+.lang-menu{ position:absolute; top:calc(100% + .55rem); right:0; min-width:182px; background:#11173a; border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:.4rem; list-style:none; box-shadow:0 20px 44px -14px rgba(0,0,0,.65); opacity:0; visibility:hidden; transform:translateY(-8px); transition:opacity .22s var(--ease), transform .22s var(--ease), visibility .22s; z-index:80; }
+.lang.open .lang-menu{ opacity:1; visibility:visible; transform:none; }
+.lang-menu li{ list-style:none; }
+.lang-menu button{ width:100%; text-align:left; display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.62rem .8rem; border-radius:10px; color:rgba(255,255,255,.82); font-family:var(--font-body); font-weight:600; font-size:var(--step--1); cursor:pointer; transition:background .18s, color .18s; }
+.lang-menu button:hover{ background:rgba(255,255,255,.08); color:#fff; }
+.lang-menu button[aria-checked="true"]{ color:var(--gold); }
+.lang-menu button[aria-checked="true"]::after{ content:"✓"; font-size:.9em; }
+
+/* mobile header: keep brand + language + a compact enter button */
+@media(max-width:600px){
+  .site-head .enter-lbl{ display:none; }
+  .site-head .btn-primary{ padding:.62rem; }
+  .lang-btn{ padding:.5rem .6rem; }
+}
+
+/* ── HERO ── */
+.hero{ position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; isolation:isolate; overflow:hidden;
+  background:linear-gradient(180deg,#090e2a 0%,#0c1338 30%,#16204e 54%,#2a2a55 72%,#45264a 86%,#5a2738 100%); color:#fff; }
+.stars{ position:absolute; inset:0; z-index:-2; pointer-events:none; }
+.star{ position:absolute; width:2px; height:2px; border-radius:50%; background:#fff; opacity:0; animation:twinkle 1.4s ease forwards; }
+@keyframes twinkle{ to{ opacity:var(--o); } }
+.glow{ position:absolute; left:50%; bottom:0; width:130%; height:34%; transform:translateX(-50%);
+  background:radial-gradient(58% 130% at 50% 112%, rgba(230,168,87,.55) 0%, rgba(214,90,60,.5) 26%, rgba(154,42,32,.32) 48%, rgba(154,42,32,0) 72%);
+  z-index:-2; filter:blur(2px); opacity:0; animation:dawnrise 2.4s var(--ease) .3s forwards; }
+@keyframes dawnrise{ from{ opacity:0; transform:translateX(-50%) translateY(40px);} to{ opacity:1; transform:translateX(-50%) translateY(0);} }
+.range{ position:absolute; left:0; right:0; bottom:0; width:100%; z-index:-1; }
+.range.back{ bottom:5%; opacity:.7; }
+.range.back path{ fill:#2c3768; }
+.range.mid{ bottom:2%; opacity:.92; }
+.range.mid path{ fill:#1a2350; }
+.range.front path{ fill:#0a0f2b; }
+.range .snow{ fill:rgba(247,245,240,.94); }
+
+.hero-inner{ position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center; padding:7rem var(--gut) clamp(3rem,8vh,5.5rem); }
+.hero-title-deva{ font-family:var(--font-deva); font-weight:600; font-size:clamp(2.4rem,1.6rem + 4vw,5rem); color:var(--gold); line-height:1; letter-spacing:.01em; text-shadow:0 2px 30px rgba(230,168,87,.35); }
+.hero-title{ font-size:var(--step-4); max-width:15ch; margin-top:.35rem; text-shadow:0 2px 40px rgba(0,0,0,.4); }
+.hero-sub{ font-family:var(--font-body); font-size:var(--step-1); font-weight:300; max-width:46ch; margin-top:1.5rem; color:rgba(255,255,255,.9); }
+.hero-sub b{ font-weight:600; color:#fff; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2.2rem; }
+.up{ opacity:0; transform:translateY(28px); animation:up .95s var(--ease) forwards; }
+.up.d1{ animation-delay:.35s; } .up.d2{ animation-delay:.5s; } .up.d3{ animation-delay:.65s; } .up.d4{ animation-delay:.8s; } .up.d5{ animation-delay:.95s; }
+@keyframes up{ to{ opacity:1; transform:none; } }
+
+.ribbon{ position:relative; z-index:3; border-top:1px solid rgba(255,255,255,.1); background:#0a0f2b; }
+.ribbon-grid{ display:grid; grid-template-columns:repeat(4,1fr); padding:1.15rem var(--gut); }
+.ribbon .item{ text-align:center; border-right:1px solid rgba(255,255,255,.1); }
+.ribbon .item:last-child{ border-right:none; }
+.ribbon .num{ font-family:var(--font-display); font-size:var(--step-2); color:#fff; line-height:1; }
+.ribbon .lab{ font-size:var(--step--1); color:rgba(255,255,255,.62); letter-spacing:.04em; margin-top:.3rem; }
+@media(max-width:620px){ .ribbon-grid{ grid-template-columns:repeat(2,1fr); gap:1.1rem .5rem; } .ribbon .item:nth-child(2){ border-right:none; } }
+
+section{ padding-block:clamp(4.5rem,10vh,8rem); }
+.section-head{ max-width:62ch; }
+.section-title{ font-size:var(--step-3); margin-top:1rem; }
+.section-lead{ font-size:var(--step-1); font-weight:300; color:var(--ink-2); margin-top:1.1rem; line-height:1.5; }
+
+.manifesto{ background:var(--paper); text-align:center; }
+.manifesto .wrap{ max-width:880px; }
+.manifesto p{ font-family:var(--font-display); font-size:var(--step-2); line-height:1.4; color:var(--ink); letter-spacing:.004em; }
+.manifesto .small{ font-family:var(--font-body); font-weight:300; font-size:var(--step-1); color:var(--ink-2); margin-top:1.6rem; max-width:60ch; margin-inline:auto; }
+.manifesto em{ font-style:normal; color:var(--crimson); }
+
+.acts{ background:var(--paper-2); }
+.acts-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:3rem; }
+@media(max-width:900px){ .acts-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:520px){ .acts-grid{ grid-template-columns:1fr; } }
+.act{ background:var(--snow); border:1px solid var(--line); border-radius:var(--r-lg); padding:1.6rem 1.5rem 1.7rem; display:flex; flex-direction:column; min-height:230px; transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease); }
+.act:hover{ transform:translateY(-5px); box-shadow:0 22px 40px -22px rgba(23,19,15,.35); border-color:var(--crimson); }
+.act-ic{ width:46px; height:46px; border-radius:13px; display:grid; place-items:center; background:var(--crimson-soft); color:var(--crimson); margin-bottom:1.1rem; }
+.act-ic svg{ width:23px; height:23px; }
+.act h3{ font-family:var(--font-display); font-size:var(--step-1); margin-bottom:.5rem; }
+.act p{ font-size:var(--step--1); color:var(--ink-2); flex:1; }
+.act .go{ margin-top:1rem; font-weight:600; font-size:var(--step--1); color:var(--crimson); display:inline-flex; align-items:center; gap:.4rem; }
+.act:hover .go svg{ transform:translateX(4px); }
+.act .go svg{ width:15px; height:15px; transition:transform .3s var(--ease); }
+
+.how{ background:var(--night); color:#fff; position:relative; overflow:hidden; }
+.how::before{ content:""; position:absolute; inset:0; background:radial-gradient(80% 60% at 100% 0%, rgba(192,57,43,.22), transparent 60%); pointer-events:none; }
+.how .eyebrow{ color:var(--gold); }
+.how .pennant path{ fill:var(--gold); }
+.how .section-title{ color:#fff; }
+.how .section-lead{ color:rgba(255,255,255,.72); }
+.steps{ margin-top:3rem; display:grid; gap:0; }
+.step{ display:grid; grid-template-columns:auto 1fr; gap:1.5rem; align-items:start; padding:1.6rem 0; border-top:1px solid rgba(255,255,255,.12); }
+.step:last-child{ border-bottom:1px solid rgba(255,255,255,.12); }
+.step-n{ font-family:var(--font-display); font-size:var(--step-2); color:var(--gold); line-height:1; width:2.4ch; }
+.step h3{ font-family:var(--font-display); font-size:var(--step-1); color:#fff; margin-bottom:.35rem; }
+.step p{ font-size:var(--step-0); font-weight:300; color:rgba(255,255,255,.74); max-width:64ch; }
+.step .np{ font-family:var(--font-deva); color:var(--gold-soft); }
+
+.dia{ background:var(--paper); }
+.dia-top{ display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:end; }
+@media(max-width:820px){ .dia-top{ grid-template-columns:1fr; gap:1.5rem; } }
+.dia-big{ font-family:var(--font-display); font-size:clamp(3.5rem,2rem + 7vw,7rem); color:var(--crimson); line-height:.9; }
+.dia-big small{ display:block; font-family:var(--font-body); font-weight:600; font-size:var(--step-0); color:var(--ink-2); letter-spacing:.04em; margin-top:.6rem; text-transform:uppercase; }
+.voices{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:3rem; }
+@media(max-width:820px){ .voices{ grid-template-columns:1fr 1fr; } }
+@media(max-width:520px){ .voices{ grid-template-columns:1fr; } }
+.voice{ background:var(--snow); border:1px solid var(--line); border-radius:var(--r); padding:1.4rem; }
+.voice .q{ font-family:var(--font-display); font-size:var(--step-0); line-height:1.5; color:var(--ink); }
+.voice .who{ display:flex; align-items:center; gap:.6rem; margin-top:1.1rem; }
+.voice .av{ width:34px; height:34px; border-radius:50%; background:var(--crimson); color:#fff; display:grid; place-items:center; font-weight:700; font-size:.78rem; flex:none; }
+.voice .nm{ font-weight:700; font-size:var(--step--1); }
+.voice .lo{ font-size:.78rem; color:var(--ink-3); }
+
+.live{ background:var(--paper-2); }
+.live-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem; flex-wrap:wrap; }
+.props{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; margin-top:2.6rem; }
+@media(max-width:880px){ .props{ grid-template-columns:1fr; max-width:560px; } }
+.prop{ background:var(--snow); border:1px solid var(--line); border-radius:var(--r); padding:1.5rem; display:flex; flex-direction:column; gap:.9rem; transition:transform .3s var(--ease), box-shadow .3s var(--ease); }
+.prop:hover{ transform:translateY(-4px); box-shadow:0 20px 36px -22px rgba(23,19,15,.4); }
+.tag{ align-self:flex-start; font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--crimson); background:var(--crimson-soft); padding:.3rem .65rem; border-radius:999px; }
+.prop h3{ font-family:var(--font-display); font-size:var(--step-1); line-height:1.15; }
+.prop .meta{ font-size:.8rem; color:var(--ink-3); display:flex; align-items:center; gap:.4rem; }
+.prop .meta svg{ flex:none; }
+.bar{ height:8px; border-radius:999px; background:var(--paper-2); overflow:hidden; }
+.bar i{ display:block; height:100%; border-radius:999px; background:linear-gradient(90deg, var(--crimson), var(--gold)); }
+.prop .vt{ display:flex; justify-content:space-between; gap:.6rem; font-size:.82rem; }
+.prop .vt b{ color:var(--crimson); }
+.prop .vt span{ color:var(--ink-3); }
+
+.trust{ background:var(--crimson); color:#fff; }
+.trust-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; }
+@media(max-width:820px){ .trust-grid{ grid-template-columns:1fr; gap:1.8rem; } }
+.trust h2{ color:#fff; font-size:var(--step-3); }
+.trust p{ font-weight:300; color:rgba(255,255,255,.9); margin-top:1rem; max-width:48ch; }
+.trust .eyebrow{ color:var(--gold-soft); }
+.trust .pennant path{ fill:var(--gold-soft); }
+.hot{ background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:var(--r-lg); padding:1.8rem; }
+.hot-row{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,.16); }
+.hot-row:first-child{ padding-top:0; } .hot-row:last-child{ border-bottom:none; padding-bottom:0; }
+.hot-row .l{ font-size:var(--step--1); color:rgba(255,255,255,.78); max-width:22ch; }
+.hot-row .n{ font-family:var(--font-display); font-size:var(--step-2); white-space:nowrap; }
+.hot-row .n small{ display:block; font-family:var(--font-body); font-size:.72rem; text-align:right; color:rgba(255,255,255,.7); }
+
+.finale{ background:radial-gradient(110% 90% at 50% 120%, rgba(192,57,43,.5), transparent 60%), linear-gradient(180deg, var(--night), var(--night-2)); color:#fff; text-align:center; position:relative; overflow:hidden; }
+.finale .wrap{ max-width:760px; position:relative; z-index:2; }
+.finale .refrain{ font-family:var(--font-deva); font-size:clamp(1.6rem,1.2rem + 2vw,2.4rem); color:var(--gold); }
+.finale h2{ font-size:var(--step-4); margin:.6rem 0 1.3rem; }
+.finale p{ font-weight:300; font-size:var(--step-1); color:rgba(255,255,255,.82); max-width:46ch; margin:0 auto 2.3rem; }
+.finale-cta{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+.finale .mini-range{ position:absolute; left:0; right:0; bottom:0; opacity:.5; z-index:1; }
+.finale .mini-range path{ fill:var(--night); }
+.finale .mini-range .snow{ fill:rgba(247,245,240,.6); }
+
+.foot{ background:var(--ink); color:rgba(255,255,255,.7); padding-block:3.5rem 2.5rem; }
+.foot-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2rem; }
+@media(max-width:820px){ .foot-top{ grid-template-columns:1fr 1fr; gap:2.2rem; } }
+@media(max-width:480px){ .foot-top{ grid-template-columns:1fr; } }
+.foot .brand{ margin-bottom:1rem; }
+.foot-blurb{ font-size:var(--step--1); max-width:34ch; line-height:1.6; }
+.foot-blurb .deva{ color:var(--gold); }
+.foot h4{ font-family:var(--font-body); font-weight:700; font-size:var(--step--1); letter-spacing:.08em; text-transform:uppercase; color:#fff; margin-bottom:1rem; }
+.foot ul{ list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.foot a{ font-size:var(--step--1); color:rgba(255,255,255,.66); transition:color .2s; }
+.foot a:hover{ color:var(--gold); }
+.foot-bottom{ margin-top:3rem; padding-top:1.6rem; border-top:1px solid rgba(255,255,255,.12); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; font-size:.8rem; color:rgba(255,255,255,.5); }
+.foot-bottom .note{ max-width:60ch; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+  .up,.glow,.star{ opacity:1!important; transform:none!important; }
+  .reveal{ opacity:1!important; transform:none!important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="site-head" id="head">
+  <a class="brand" href="#top" aria-label="Nepal Speaks home">
+    <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <rect width="36" height="36" rx="9" fill="#c0392b"/>
+      <path d="M10 26 L18 10 L26 26" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13.5 21 H22.5" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+      <circle cx="18" cy="10" r="2" fill="#e6a857"/>
+    </svg>
+    <span class="brand-name">Nepal<b>Speaks</b></span>
+  </a>
+
+  <div class="head-actions">
+    <a class="head-link" href="#acts" data-i18n="nav.acts">What you can do</a>
+    <a class="head-link" href="#how" data-i18n="nav.how">How it works</a>
+    <a class="head-link" href="#live" data-i18n="nav.props">Proposals</a>
+
+    <!-- Language switcher -->
+    <div class="lang" id="lang">
+      <button class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language / भाषा / 语言">
+        <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9Z"/></svg>
+        <span id="lang-current">English</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="lang-menu" id="lang-menu" role="menu" aria-label="Choose language">
+        <li><button role="menuitemradio" aria-checked="true"  data-lang="en">English</button></li>
+        <li><button role="menuitemradio" aria-checked="false" data-lang="ne" lang="ne">नेपाली</button></li>
+        <li><button role="menuitemradio" aria-checked="false" data-lang="zh-Hans" lang="zh-Hans">简体中文</button></li>
+        <li><button role="menuitemradio" aria-checked="false" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button></li>
+      </ul>
+    </div>
+
+    <a class="btn btn-primary" href="nepal-speaks.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="enter-lbl" data-i18n="nav.enter">Enter the platform</span>
+    </a>
+  </div>
+</header>
+
+<!-- ════ HERO ════ -->
+<main id="top">
+<section class="hero">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <svg class="range back" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,220 L0,150 L150,70 L300,140 L470,40 L640,150 L820,60 L1010,150 L1200,80 L1440,160 L1440,220 Z"/>
+  </svg>
+  <svg class="range mid" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,260 L0,170 L180,90 L360,180 L560,60 L760,180 L980,70 L1180,170 L1440,90 L1440,260 Z"/>
+    <path class="snow" d="M560,60 L520,118 L545,108 L560,130 L578,104 L602,116 Z"/>
+    <path class="snow" d="M980,70 L946,122 L968,112 L980,134 L994,110 L1016,122 Z"/>
+  </svg>
+  <svg class="range front" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,300 L0,210 L240,110 L470,230 L700,90 L930,235 L1160,120 L1440,210 L1440,300 Z"/>
+    <path class="snow" d="M700,90 L654,166 L686,150 L700,182 L720,146 L748,168 Z"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-title-deva up d1" lang="ne">मेरो नेपाल</p>
+      <h1 class="hero-title up d2" data-i18n="hero.head">Your voice reaches home.</h1>
+      <p class="hero-sub up d3" data-i18n-html="hero.sub">A civic platform where every Nepali — in the village or across an ocean — can <b>propose ideas, vote on what matters, and press for real change</b>. Distance shouldn't mean silence.</p>
+      <div class="hero-cta up d4">
+        <a class="btn btn-primary btn-lg" href="nepal-speaks.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+          <span data-i18n="hero.cta1">Add your voice</span>
+        </a>
+        <a class="btn btn-ghost-light btn-lg" href="#manifesto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19V5l13 7-13 7Z" stroke-linejoin="round"/></svg>
+          <span data-i18n="hero.cta2">See why it matters</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ribbon up d5">
+    <div class="ribbon-grid">
+      <div class="item"><div class="num">2,847</div><div class="lab" data-i18n="ribbon.l1">Proposals raised</div></div>
+      <div class="item"><div class="num">148K</div><div class="lab" data-i18n="ribbon.l2">Votes cast</div></div>
+      <div class="item"><div class="num">34,291</div><div class="lab" data-i18n="ribbon.l3">Citizens joined</div></div>
+      <div class="item"><div class="num">38</div><div class="lab" data-i18n="ribbon.l4">Countries reached</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MANIFESTO ════ -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap reveal">
+    <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="man.eye">Why we built this</span></span>
+    <p style="margin-top:1.4rem;" data-i18n="man.p1">A promise made at election time. A road that never came. A complaint filed and never answered. For too long, the gap between a citizen and their government has been a one-way street — and for the millions of Nepalis working abroad, that street felt closed entirely.</p>
+    <p class="small" data-i18n-html="man.p2">Nepal Speaks turns scattered frustration into <em>collective, countable demand</em>. One person is easy to ignore. Ten thousand votes on a single proposal are not.</p>
+  </div>
+</section>
+
+<!-- ════ CAPABILITIES ════ -->
+<section class="acts" id="acts">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="acts.eye">What you can do</span></span>
+      <h2 class="section-title" data-i18n="acts.title">Four ways to be heard.</h2>
+    </div>
+    <div class="acts-grid">
+      <a class="act reveal" href="nepal-speaks.html">
+        <span class="act-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>
+        <h3 data-i18n="acts.propose">Propose</h3>
+        <p data-i18n="acts.propose.d">Name the change your community needs — a road, a health post, a school's internet — in plain words.</p>
+        <span class="go"><span data-i18n="acts.propose.go">Submit a proposal</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="act reveal" href="nepal-speaks.html">
+        <span class="act-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11v9M4 11h3l5-7a2 2 0 0 1 2 3l-1 4h4a2 2 0 0 1 2 2l-1.5 6a2 2 0 0 1-2 1.5H7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="acts.vote">Vote</h3>
+        <p data-i18n="acts.vote.d">Back the proposals that matter most. Numbers are leverage — your vote pushes an idea up the priority list.</p>
+        <span class="go"><span data-i18n="acts.vote.go">Browse &amp; vote</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="act reveal" href="nepal-speaks.html">
+        <span class="act-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="acts.discuss">Discuss</h3>
+        <p data-i18n="acts.discuss.d">Add evidence, share what's happening on the ground, and build the case — in Nepali or English.</p>
+        <span class="go"><span data-i18n="acts.discuss.go">Join a thread</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="act reveal" href="nepal-speaks.html">
+        <span class="act-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 14v.01M12 7v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="acts.report">Report</h3>
+        <p data-i18n="acts.report.d">Take it to the right office. Find the ministry, the hotline, and the exact steps to file a real complaint.</p>
+        <span class="go"><span data-i18n="acts.report.go">Find the office</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="how.eye">From idea to action</span></span>
+      <h2 class="section-title" data-i18n="how.title">How a voice becomes change.</h2>
+      <p class="section-lead" data-i18n="how.lead">Five steps, the same whether you're in Jumla or Japan.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="step-n">01</div><div><h3 data-i18n="how.s1.h">Verify your connection to Nepal</h3><p data-i18n-html="how.s1.p">Register once. Your identity stays private — only your home district is shown, so every voice is rooted in a real place. <span class="np" lang="ne">घर जिल्ला</span>.</p></div></div>
+      <div class="step reveal"><div class="step-n">02</div><div><h3 data-i18n="how.s2.h">Raise or back a proposal</h3><p data-i18n="how.s2.p">Write your own, or add your vote to one already moving. Each proposal carries a category, a province, and a target it's climbing toward.</p></div></div>
+      <div class="step reveal"><div class="step-n">03</div><div><h3 data-i18n="how.s3.h">Build the case together</h3><p data-i18n="how.s3.p">The community sharpens it — discussion, evidence, lived experience from home and abroad — until it's impossible to dismiss.</p></div></div>
+      <div class="step reveal"><div class="step-n">04</div><div><h3 data-i18n="how.s4.h">Cross the threshold</h3><p data-i18n="how.s4.p">When a proposal hits its vote target, it rises to the public dashboard: a ranked, undeniable record of what citizens are demanding.</p></div></div>
+      <div class="step reveal"><div class="step-n">05</div><div><h3 data-i18n="how.s5.h">Carry it to the people in charge</h3><p data-i18n-html="how.s5.p">Take it to your MP, your <span class="np" lang="ne">पालिका</span>, the press, and the official complaint channels — with the weight of thousands behind it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ DIASPORA ════ -->
+<section class="dia" id="dia">
+  <div class="wrap">
+    <div class="dia-top">
+      <div class="reveal">
+        <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="dia.eye">One nation, every time zone</span></span>
+        <h2 class="section-title" style="margin-top:1rem;" data-i18n="dia.title">The kitchen in Sydney still has a vote in the village.</h2>
+        <p class="section-lead" data-i18n="dia.lead">More than two million Nepalis live and work abroad, sending home the remittances that hold families up. Their stake in Nepal never left. Here, it counts.</p>
+      </div>
+      <div class="dia-big reveal">38<small data-i18n="dia.big.sub">Countries, one voice</small></div>
+    </div>
+    <div class="voices">
+      <figure class="voice reveal">
+        <p class="q" data-i18n="dia.q1">“We send money home every month. The least the government can do is invest in our children's schools.”</p>
+        <figcaption class="who"><span class="av">PL</span><span><span class="nm">Priya L.</span><br><span class="lo">Melbourne, Australia 🇦🇺</span></span></figcaption>
+      </figure>
+      <figure class="voice reveal">
+        <p class="q" data-i18n="dia.q2">“My family still farms in Bara. An organic subsidy would help thousands of families like mine survive.”</p>
+        <figcaption class="who"><span class="av">KD</span><span><span class="nm">Kamala D.</span><br><span class="lo">Doha, Qatar 🇶🇦</span></span></figcaption>
+      </figure>
+      <figure class="voice reveal">
+        <p class="q" data-i18n="dia.q3">“The Bagmati was a holy river. Now it's a sewer. From Tokyo I can still push for it to be cleaned.”</p>
+        <figcaption class="who"><span class="av">RT</span><span><span class="nm">Roshan T.</span><br><span class="lo">Tokyo, Japan 🇯🇵</span></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ════ LIVE PROPOSALS ════ -->
+<section class="live" id="live">
+  <div class="wrap">
+    <div class="live-head reveal">
+      <div class="section-head">
+        <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="live.eye">Moving right now</span></span>
+        <h2 class="section-title" data-i18n="live.title">Proposals climbing toward their target.</h2>
+      </div>
+      <a class="btn btn-primary" href="nepal-speaks.html"><span data-i18n="live.seeall">See all 2,847</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="props">
+      <a class="prop reveal" href="nepal-speaks.html">
+        <span class="tag" data-i18n="live.t1">Environment</span>
+        <h3 data-i18n="live.h1">Clean up the Bagmati River — a six-month action plan</h3>
+        <div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Kathmandu, Bagmati</div>
+        <div class="bar"><i style="width:86%"></i></div>
+        <div class="vt"><b data-i18n="live.v1b">21,400 votes</b><span data-i18n="live.v1s">of 25,000 target</span></div>
+      </a>
+      <a class="prop reveal" href="nepal-speaks.html">
+        <span class="tag" data-i18n="live.t2">Governance</span>
+        <h3 data-i18n="live.h2">Corruption-free procurement for every infrastructure project</h3>
+        <div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="live.m2">National — all Nepal</span></div>
+        <div class="bar"><i style="width:91%"></i></div>
+        <div class="vt"><b data-i18n="live.v2b">18,200 votes</b><span data-i18n="live.v2s">of 20,000 target</span></div>
+      </a>
+      <a class="prop reveal" href="nepal-speaks.html">
+        <span class="tag" data-i18n="live.t3">Infrastructure</span>
+        <h3 data-i18n="live.h3">A paved road from Lamkichuha to Mothipur</h3>
+        <div class="meta"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Kailali, Sudurpashchim</div>
+        <div class="bar"><i style="width:85%"></i></div>
+        <div class="vt"><b data-i18n="live.v3b">12,840 votes</b><span data-i18n="live.v3s">of 15,000 target</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TRUST / REPORT ════ -->
+<section class="trust" id="report">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="reveal">
+        <span class="eyebrow"><svg class="pennant" viewBox="0 0 30 36" aria-hidden="true"><path d="M2 2 L2 34 L26 20 L8 18 L26 4 Z"/></svg><span data-i18n="trust.eye">Not just talk</span></span>
+        <h2 data-i18n="trust.title">The real channels, in one place.</h2>
+        <p data-i18n="trust.p">Voting builds the pressure — but we also hand you the official routes to act: the toll-free grievance line, the anti-corruption commission, and a directory of every ministry with working phone numbers and complaint portals.</p>
+        <a class="btn btn-ghost-light btn-lg" href="nepal-speaks.html" style="margin-top:1.6rem; border-color:rgba(255,255,255,.5);">
+          <span data-i18n="trust.cta">Open the directory</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="hot reveal">
+        <div class="hot-row"><span class="l" data-i18n="trust.r1">National grievance hotline · toll-free</span><span class="n">1505</span></div>
+        <div class="hot-row"><span class="l" data-i18n="trust.r2">Health helpline</span><span class="n">1115</span></div>
+        <div class="hot-row"><span class="l" data-i18n="trust.r3">Anti-corruption commission (CIAA)</span><span class="n">01-4211904</span></div>
+        <div class="hot-row"><span class="l" data-i18n="trust.r4">Online complaints portal</span><span class="n" style="font-size:var(--step-0)">crcnepal<small>.gov.np</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FINAL CTA ════ -->
+<section class="finale">
+  <svg class="mini-range" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,200 L0,150 L260,70 L520,160 L760,60 L1010,165 L1240,90 L1440,150 L1440,200 Z"/>
+    <path class="snow" d="M760,60 L724,120 L752,108 L760,138 L778,104 L806,120 Z"/>
+  </svg>
+  <div class="wrap reveal">
+    <p class="refrain" lang="ne">तपाईंको आवाज, नेपालको भविष्य</p>
+    <h2 data-i18n="fin.head">Add your voice.</h2>
+    <p data-i18n="fin.p">It takes a minute to join and a moment to vote. The change takes all of us.</p>
+    <div class="finale-cta">
+      <a class="btn btn-primary btn-lg" href="nepal-speaks.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+        <span data-i18n="fin.cta1">Enter the platform</span>
+      </a>
+      <a class="btn btn-ghost-light btn-lg" href="#live" data-i18n="fin.cta2">See what's moving</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ════ FOOTER ════ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="brand" href="#top" aria-label="Nepal Speaks home">
+          <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="9" fill="#c0392b"/>
+            <path d="M10 26 L18 10 L26 26" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.5 21 H22.5" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+            <circle cx="18" cy="10" r="2" fill="#e6a857"/>
+          </svg>
+          <span class="brand-name">Nepal<b>Speaks</b></span>
+        </a>
+        <p class="foot-blurb" data-i18n-html="foot.blurb"><span class="deva" lang="ne">नेपाल बोल्छ</span> — a civic platform built by Nepalis, for Nepalis, at home and abroad. Your voice reaches home.</p>
+      </div>
+      <div>
+        <h4 data-i18n="foot.col.platform">Platform</h4>
+        <ul>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.browse">Browse proposals</a></li>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.submit">Submit an idea</a></li>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.disc">Discussions</a></li>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.report">Report &amp; contacts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot.col.learn">Learn</h4>
+        <ul>
+          <li><a href="#manifesto" data-i18n="foot.l.why">Why we built this</a></li>
+          <li><a href="#how" data-i18n="foot.l.how">How it works</a></li>
+          <li><a href="#dia" data-i18n="foot.l.dia">For the diaspora</a></li>
+          <li><a href="#report" data-i18n="foot.l.channels">Official channels</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot.col.join">Join in</h4>
+        <ul>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.create">Create an account</a></li>
+          <li><a href="nepal-speaks.html" data-i18n="foot.l.signin">Sign in</a></li>
+          <li><a href="#top" data-i18n="foot.l.share">Share the platform</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nepal Speaks · नेपाल बोल्छ</span>
+      <span class="note" data-i18n="foot.note">An independent citizens' initiative. Not affiliated with or endorsed by the Government of Nepal. Official phone numbers and portals are provided for your convenience — always verify on government websites.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Translations ── (backtick values keep quotes/markup safe) */
+const I18N = {
+  en: {
+    "doc.title":`Nepal Speaks — Your voice reaches home`,
+    "nav.acts":`What you can do`, "nav.how":`How it works`, "nav.props":`Proposals`, "nav.enter":`Enter the platform`,
+    "hero.head":`Your voice reaches home.`,
+    "hero.sub":`A civic platform where every Nepali — in the village or across an ocean — can <b>propose ideas, vote on what matters, and press for real change</b>. Distance shouldn't mean silence.`,
+    "hero.cta1":`Add your voice`, "hero.cta2":`See why it matters`,
+    "ribbon.l1":`Proposals raised`, "ribbon.l2":`Votes cast`, "ribbon.l3":`Citizens joined`, "ribbon.l4":`Countries reached`,
+    "man.eye":`Why we built this`,
+    "man.p1":`A promise made at election time. A road that never came. A complaint filed and never answered. For too long, the gap between a citizen and their government has been a one-way street — and for the millions of Nepalis working abroad, that street felt closed entirely.`,
+    "man.p2":`Nepal Speaks turns scattered frustration into <em>collective, countable demand</em>. One person is easy to ignore. Ten thousand votes on a single proposal are not.`,
+    "acts.eye":`What you can do`, "acts.title":`Four ways to be heard.`,
+    "acts.propose":`Propose`, "acts.propose.d":`Name the change your community needs — a road, a health post, a school's internet — in plain words.`, "acts.propose.go":`Submit a proposal`,
+    "acts.vote":`Vote`, "acts.vote.d":`Back the proposals that matter most. Numbers are leverage — your vote pushes an idea up the priority list.`, "acts.vote.go":`Browse & vote`,
+    "acts.discuss":`Discuss`, "acts.discuss.d":`Add evidence, share what's happening on the ground, and build the case — in Nepali or English.`, "acts.discuss.go":`Join a thread`,
+    "acts.report":`Report`, "acts.report.d":`Take it to the right office. Find the ministry, the hotline, and the exact steps to file a real complaint.`, "acts.report.go":`Find the office`,
+    "how.eye":`From idea to action`, "how.title":`How a voice becomes change.`, "how.lead":`Five steps, the same whether you're in Jumla or Japan.`,
+    "how.s1.h":`Verify your connection to Nepal`, "how.s1.p":`Register once. Your identity stays private — only your home district is shown, so every voice is rooted in a real place. <span class="np" lang="ne">घर जिल्ला</span>.`,
+    "how.s2.h":`Raise or back a proposal`, "how.s2.p":`Write your own, or add your vote to one already moving. Each proposal carries a category, a province, and a target it's climbing toward.`,
+    "how.s3.h":`Build the case together`, "how.s3.p":`The community sharpens it — discussion, evidence, lived experience from home and abroad — until it's impossible to dismiss.`,
+    "how.s4.h":`Cross the threshold`, "how.s4.p":`When a proposal hits its vote target, it rises to the public dashboard: a ranked, undeniable record of what citizens are demanding.`,
+    "how.s5.h":`Carry it to the people in charge`, "how.s5.p":`Take it to your MP, your <span class="np" lang="ne">पालिका</span>, the press, and the official complaint channels — with the weight of thousands behind it.`,
+    "dia.eye":`One nation, every time zone`, "dia.title":`The kitchen in Sydney still has a vote in the village.`,
+    "dia.lead":`More than two million Nepalis live and work abroad, sending home the remittances that hold families up. Their stake in Nepal never left. Here, it counts.`,
+    "dia.big.sub":`Countries, one voice`,
+    "dia.q1":`“We send money home every month. The least the government can do is invest in our children's schools.”`,
+    "dia.q2":`“My family still farms in Bara. An organic subsidy would help thousands of families like mine survive.”`,
+    "dia.q3":`“The Bagmati was a holy river. Now it's a sewer. From Tokyo I can still push for it to be cleaned.”`,
+    "live.eye":`Moving right now`, "live.title":`Proposals climbing toward their target.`, "live.seeall":`See all 2,847`,
+    "live.t1":`Environment`, "live.h1":`Clean up the Bagmati River — a six-month action plan`,
+    "live.t2":`Governance`, "live.h2":`Corruption-free procurement for every infrastructure project`, "live.m2":`National — all Nepal`,
+    "live.t3":`Infrastructure`, "live.h3":`A paved road from Lamkichuha to Mothipur`,
+    "live.v1b":`21,400 votes`, "live.v1s":`of 25,000 target`,
+    "live.v2b":`18,200 votes`, "live.v2s":`of 20,000 target`,
+    "live.v3b":`12,840 votes`, "live.v3s":`of 15,000 target`,
+    "trust.eye":`Not just talk`, "trust.title":`The real channels, in one place.`,
+    "trust.p":`Voting builds the pressure — but we also hand you the official routes to act: the toll-free grievance line, the anti-corruption commission, and a directory of every ministry with working phone numbers and complaint portals.`,
+    "trust.cta":`Open the directory`,
+    "trust.r1":`National grievance hotline · toll-free`, "trust.r2":`Health helpline`, "trust.r3":`Anti-corruption commission (CIAA)`, "trust.r4":`Online complaints portal`,
+    "fin.head":`Add your voice.`, "fin.p":`It takes a minute to join and a moment to vote. The change takes all of us.`, "fin.cta1":`Enter the platform`, "fin.cta2":`See what's moving`,
+    "foot.blurb":`<span class="deva" lang="ne">नेपाल बोल्छ</span> — a civic platform built by Nepalis, for Nepalis, at home and abroad. Your voice reaches home.`,
+    "foot.col.platform":`Platform`, "foot.col.learn":`Learn`, "foot.col.join":`Join in`,
+    "foot.l.browse":`Browse proposals`, "foot.l.submit":`Submit an idea`, "foot.l.disc":`Discussions`, "foot.l.report":`Report & contacts`,
+    "foot.l.why":`Why we built this`, "foot.l.how":`How it works`, "foot.l.dia":`For the diaspora`, "foot.l.channels":`Official channels`,
+    "foot.l.create":`Create an account`, "foot.l.signin":`Sign in`, "foot.l.share":`Share the platform`,
+    "foot.note":`An independent citizens' initiative. Not affiliated with or endorsed by the Government of Nepal. Official phone numbers and portals are provided for your convenience — always verify on government websites.`
+  },
+
+  ne: {
+    "doc.title":`नेपाल स्पिक्स — तपाईंको आवाज घरसम्म पुग्छ`,
+    "nav.acts":`के गर्न सकिन्छ`, "nav.how":`यो कसरी काम गर्छ`, "nav.props":`प्रस्तावहरू`, "nav.enter":`प्लेटफर्ममा जानुहोस्`,
+    "hero.head":`तपाईंको आवाज घरसम्म पुग्छ।`,
+    "hero.sub":`एउटा नागरिक मञ्च जहाँ हरेक नेपाली — गाउँमा होस् या समुद्रपारि — <b>विचार राख्न, महत्त्वपूर्ण कुरामा मतदान गर्न, र साँचो परिवर्तनका लागि दबाब दिन</b> सक्छन्। दूरीले मौनता ल्याउनु हुँदैन।`,
+    "hero.cta1":`आफ्नो आवाज थप्नुहोस्`, "hero.cta2":`किन महत्त्वपूर्ण छ हेर्नुहोस्`,
+    "ribbon.l1":`उठाइएका प्रस्ताव`, "ribbon.l2":`हालिएका मत`, "ribbon.l3":`जोडिएका नागरिक`, "ribbon.l4":`पुगेका देश`,
+    "man.eye":`हामीले किन बनायौं`,
+    "man.p1":`चुनावका बेला गरिएको वाचा। कहिल्यै नबनेको सडक। दर्ता भएर पनि जवाफ नआएको उजुरी। धेरै लामो समयदेखि नागरिक र सरकारबीचको दूरी एकतर्फी बाटो जस्तै रह्यो — र विदेशमा काम गर्ने लाखौं नेपालीका लागि त त्यो बाटो पूरै बन्द जस्तै थियो।`,
+    "man.p2":`नेपाल स्पिक्सले छरिएको असन्तुष्टिलाई <em>सामूहिक, गन्न मिल्ने माग</em>मा बदल्छ। एक व्यक्तिलाई बेवास्ता गर्न सजिलो छ। एउटै प्रस्तावमा दस हजार मत भने होइन।`,
+    "acts.eye":`के गर्न सकिन्छ`, "acts.title":`सुनिने चार तरिका।`,
+    "acts.propose":`प्रस्ताव`, "acts.propose.d":`तपाईंको समुदायलाई चाहिने परिवर्तन सरल शब्दमा लेख्नुहोस् — सडक, स्वास्थ्य चौकी, वा विद्यालयको इन्टरनेट।`, "acts.propose.go":`प्रस्ताव पेश गर्नुहोस्`,
+    "acts.vote":`मतदान`, "acts.vote.d":`सबैभन्दा महत्त्वपूर्ण प्रस्तावलाई समर्थन गर्नुहोस्। सङ्ख्या नै शक्ति हो — तपाईंको मतले विचारलाई प्राथमिकतामा माथि पुर्‍याउँछ।`, "acts.vote.go":`हेर्नुहोस् र मत दिनुहोस्`,
+    "acts.discuss":`छलफल`, "acts.discuss.d":`प्रमाण थप्नुहोस्, जमिनी अवस्था बाँड्नुहोस्, र तर्क बलियो बनाउनुहोस् — नेपाली वा अङ्ग्रेजीमा।`, "acts.discuss.go":`छलफलमा सहभागी हुनुहोस्`,
+    "acts.report":`उजुरी`, "acts.report.d":`सही कार्यालयसम्म पुर्‍याउनुहोस्। मन्त्रालय, हटलाइन, र साँचो उजुरी दर्ता गर्ने स्पष्ट चरणहरू पत्ता लगाउनुहोस्।`, "acts.report.go":`कार्यालय खोज्नुहोस्`,
+    "how.eye":`विचारदेखि कार्यसम्म`, "how.title":`आवाज कसरी परिवर्तन बन्छ।`, "how.lead":`पाँच चरण — तपाईं जुम्लामा हुनुहोस् या जापानमा, उस्तै।`,
+    "how.s1.h":`नेपालसँगको आफ्नो नाता प्रमाणित गर्नुहोस्`, "how.s1.p":`एक पटक दर्ता गर्नुहोस्। तपाईंको पहिचान गोप्य रहन्छ — केवल तपाईंको <span class="np" lang="ne">घर जिल्ला</span> देखाइन्छ, ताकि हरेक आवाज वास्तविक ठाउँमा जरा गाडेको होस्।`,
+    "how.s2.h":`प्रस्ताव राख्नुहोस् वा समर्थन गर्नुहोस्`, "how.s2.p":`आफ्नै लेख्नुहोस्, वा अघि बढिरहेको प्रस्तावमा मत थप्नुहोस्। हरेक प्रस्तावसँग एउटा वर्ग, प्रदेश, र पुग्नुपर्ने लक्ष्य हुन्छ।`,
+    "how.s3.h":`मिलेर तर्क बलियो बनाउनुहोस्`, "how.s3.p":`समुदायले यसलाई धारिलो बनाउँछ — छलफल, प्रमाण, स्वदेश र विदेशको भोगाइ — जबसम्म यसलाई पन्छाउन असम्भव हुँदैन।`,
+    "how.s4.h":`सीमा नाघ्नुहोस्`, "how.s4.p":`कुनै प्रस्तावले मतको लक्ष्य भेट्टाएपछि, यो सार्वजनिक ड्यासबोर्डमा उक्लन्छ: नागरिकले के माग गरिरहेका छन् भन्ने क्रमबद्ध, अकाट्य अभिलेख।`,
+    "how.s5.h":`जिम्मेवार व्यक्तिसम्म पुर्‍याउनुहोस्`, "how.s5.p":`यसलाई तपाईंको सांसद, <span class="np" lang="ne">पालिका</span>, सञ्चारमाध्यम, र आधिकारिक उजुरी माध्यमसम्म पुर्‍याउनुहोस् — हजारौंको साथ पछाडि राखेर।`,
+    "dia.eye":`एउटै देश, हरेक समय क्षेत्र`, "dia.title":`सिड्नीको भान्साको पनि गाउँमा मत हुन्छ।`,
+    "dia.lead":`बीस लाखभन्दा बढी नेपाली विदेशमा बस्छन् र काम गर्छन्, परिवार धान्ने रेमिट्यान्स पठाउँछन्। नेपालप्रतिको उनीहरूको सरोकार कहिल्यै गएन। यहाँ, त्यो गनिन्छ।`,
+    "dia.big.sub":`देश, एउटै आवाज`,
+    "dia.q1":`“हामी हरेक महिना घर पैसा पठाउँछौं। सरकारले कम्तीमा हाम्रा छोराछोरीको विद्यालयमा लगानी त गर्न सक्छ।”`,
+    "dia.q2":`“मेरो परिवार अझै बारामा खेती गर्छ। जैविक अनुदानले मेरो जस्तै हजारौं परिवारलाई टिक्न मद्दत गर्छ।”`,
+    "dia.q3":`“बागमती पवित्र नदी थियो। अहिले ढल भएको छ। टोकियोबाट पनि म यसलाई सफा गराउन दबाब दिन सक्छु।”`,
+    "live.eye":`अहिले अघि बढ्दै`, "live.title":`लक्ष्यतर्फ उक्लँदै गरेका प्रस्ताव।`, "live.seeall":`सबै 2,847 हेर्नुहोस्`,
+    "live.t1":`वातावरण`, "live.h1":`बागमती नदी सफाइ — छ महिने कार्ययोजना`,
+    "live.t2":`सुशासन`, "live.h2":`हरेक पूर्वाधार परियोजनामा भ्रष्टाचारमुक्त खरिद`, "live.m2":`राष्ट्रिय — सम्पूर्ण नेपाल`,
+    "live.t3":`पूर्वाधार`, "live.h3":`लम्कीचुहादेखि मोतीपुरसम्म पक्की सडक`,
+    "live.v1b":`21,400 मत`, "live.v1s":`25,000 को लक्ष्यमध्ये`,
+    "live.v2b":`18,200 मत`, "live.v2s":`20,000 को लक्ष्यमध्ये`,
+    "live.v3b":`12,840 मत`, "live.v3s":`15,000 को लक्ष्यमध्ये`,
+    "trust.eye":`कुरा मात्र होइन`, "trust.title":`वास्तविक माध्यमहरू, एकै ठाउँमा।`,
+    "trust.p":`मतदानले दबाब बढाउँछ — तर हामी तपाईंलाई कार्य गर्ने आधिकारिक बाटो पनि दिन्छौं: नि:शुल्क गुनासो लाइन, अख्तियार आयोग, र काम गर्ने फोन नम्बर तथा उजुरी पोर्टलसहितको हरेक मन्त्रालयको निर्देशिका।`,
+    "trust.cta":`निर्देशिका खोल्नुहोस्`,
+    "trust.r1":`राष्ट्रिय गुनासो हटलाइन · नि:शुल्क`, "trust.r2":`स्वास्थ्य हेल्पलाइन`, "trust.r3":`अख्तियार दुरुपयोग अनुसन्धान आयोग (CIAA)`, "trust.r4":`अनलाइन उजुरी पोर्टल`,
+    "fin.head":`आफ्नो आवाज थप्नुहोस्।`, "fin.p":`जोडिन एक मिनेट, मत दिन एक क्षण लाग्छ। परिवर्तनलाई भने हामी सबै चाहिन्छ।`, "fin.cta1":`प्लेटफर्ममा जानुहोस्`, "fin.cta2":`के अघि बढ्दैछ हेर्नुहोस्`,
+    "foot.blurb":`<span class="deva" lang="ne">नेपाल बोल्छ</span> — स्वदेश र विदेशका नेपालीहरूले नेपालीका लागि बनाएको नागरिक मञ्च। तपाईंको आवाज घरसम्म पुग्छ।`,
+    "foot.col.platform":`मञ्च`, "foot.col.learn":`बुझ्नुहोस्`, "foot.col.join":`सहभागी हुनुहोस्`,
+    "foot.l.browse":`प्रस्ताव हेर्नुहोस्`, "foot.l.submit":`विचार पेश गर्नुहोस्`, "foot.l.disc":`छलफल`, "foot.l.report":`उजुरी र सम्पर्क`,
+    "foot.l.why":`हामीले किन बनायौं`, "foot.l.how":`यो कसरी काम गर्छ`, "foot.l.dia":`प्रवासीका लागि`, "foot.l.channels":`आधिकारिक माध्यम`,
+    "foot.l.create":`खाता बनाउनुहोस्`, "foot.l.signin":`साइन इन`, "foot.l.share":`मञ्च साझा गर्नुहोस्`,
+    "foot.note":`एक स्वतन्त्र नागरिक अभियान। नेपाल सरकारसँग सम्बद्ध वा अनुमोदित होइन। आधिकारिक फोन नम्बर र पोर्टल तपाईंको सुविधाका लागि दिइएका हुन् — सधैं सरकारी वेबसाइटमा पुष्टि गर्नुहोस्।`
+  },
+
+  "zh-Hans": {
+    "doc.title":`Nepal Speaks — 你的声音,传回家乡`,
+    "nav.acts":`你能做什么`, "nav.how":`运作方式`, "nav.props":`提案`, "nav.enter":`进入平台`,
+    "hero.head":`你的声音,传回家乡。`,
+    "hero.sub":`一个公民平台,让每一位尼泊尔人——无论身在村庄还是远隔重洋——都能<b>提出想法、为重要议题投票、并推动真正的改变</b>。距离不该意味着沉默。`,
+    "hero.cta1":`加入你的声音`, "hero.cta2":`了解为何重要`,
+    "ribbon.l1":`已发起提案`, "ribbon.l2":`已投票数`, "ribbon.l3":`参与公民`, "ribbon.l4":`覆盖国家`,
+    "man.eye":`我们为何创建`,
+    "man.p1":`选举时许下的承诺。始终没有修好的路。递交后石沉大海的投诉。长久以来,公民与政府之间只是一条单行道——而对于数百万在海外务工的尼泊尔人来说,这条路几乎完全封闭。`,
+    "man.p2":`Nepal Speaks 把零散的不满,汇聚成<em>可计数的集体诉求</em>。忽视一个人很容易,但忽视一份提案上的一万张选票却不然。`,
+    "acts.eye":`你能做什么`, "acts.title":`让你被听见的四种方式。`,
+    "acts.propose":`提议`, "acts.propose.d":`用朴实的话,说出你的社区需要的改变——一条路、一个卫生站、一所学校的网络。`, "acts.propose.go":`提交提案`,
+    "acts.vote":`投票`, "acts.vote.d":`为最重要的提案投上一票。数字就是力量——你的一票能把一个想法推上优先列表。`, "acts.vote.go":`浏览并投票`,
+    "acts.discuss":`讨论`, "acts.discuss.d":`补充证据,分享当地实况,夯实理据——用尼泊尔语或英语。`, "acts.discuss.go":`加入讨论`,
+    "acts.report":`举报`, "acts.report.d":`把问题送到对的部门。找到对应的部委、热线,以及正式投诉的具体步骤。`, "acts.report.go":`查找部门`,
+    "how.eye":`从想法到行动`, "how.title":`声音如何化为改变。`, "how.lead":`五个步骤,无论你在 Jumla 还是日本,都一样。`,
+    "how.s1.h":`验证你与尼泊尔的关联`, "how.s1.p":`注册一次即可。你的身份保持私密——只显示你的<span class="np" lang="ne">घर जिल्ला</span>(家乡所在县),让每个声音都根植于真实的地方。`,
+    "how.s2.h":`发起或支持提案`, "how.s2.p":`自己撰写,或为正在推进的提案投票。每份提案都有所属分类、省份,以及正在冲刺的目标票数。`,
+    "how.s3.h":`共同夯实理据`, "how.s3.p":`社区让它愈发有力——讨论、证据、来自国内外的亲身经历——直到无法被忽视。`,
+    "how.s4.h":`跨过门槛`, "how.s4.p":`当提案达到目标票数,它就会登上公共看板:一份排序清晰、无可否认的公民诉求记录。`,
+    "how.s5.h":`送到主事者手中`, "how.s5.p":`把它带给你的议员、你的<span class="np" lang="ne">पालिका</span>(地方政府)、媒体以及官方投诉渠道——背后有成千上万人的分量。`,
+    "dia.eye":`同一个国家,跨越每个时区`, "dia.title":`悉尼的厨房,在家乡村庄里依然有一票。`,
+    "dia.lead":`超过两百万尼泊尔人在海外生活和工作,寄回支撑家庭的侨汇。他们对尼泊尔的牵挂从未离开。在这里,它算数。`,
+    "dia.big.sub":`个国家,同一种声音`,
+    "dia.q1":`“我们每月往家里寄钱。政府至少可以为我们孩子的学校投资。”`,
+    "dia.q2":`“我家还在 Bara 务农。有机补贴能帮助千千万万像我这样的家庭生存下去。”`,
+    "dia.q3":`“巴格马蒂曾是圣河,如今却成了下水道。即使身在东京,我依然能为它的清理出力。”`,
+    "live.eye":`正在推进`, "live.title":`正在冲向目标的提案。`, "live.seeall":`查看全部 2,847 项`,
+    "live.t1":`环境`, "live.h1":`清理巴格马蒂河——六个月行动计划`,
+    "live.t2":`治理`, "live.h2":`让每个基建项目的采购都无腐败`, "live.m2":`全国——尼泊尔全境`,
+    "live.t3":`基础设施`, "live.h3":`从 Lamkichuha 到 Mothipur 的柏油路`,
+    "live.v1b":`21,400 票`, "live.v1s":`目标 25,000`,
+    "live.v2b":`18,200 票`, "live.v2s":`目标 20,000`,
+    "live.v3b":`12,840 票`, "live.v3s":`目标 15,000`,
+    "trust.eye":`不止于空谈`, "trust.title":`真正的渠道,集于一处。`,
+    "trust.p":`投票形成压力——但我们也为你提供正式的行动途径:免费申诉热线、反腐败委员会,以及附有可用电话和投诉入口的各部委名录。`,
+    "trust.cta":`打开名录`,
+    "trust.r1":`全国申诉热线 · 免费`, "trust.r2":`卫生求助热线`, "trust.r3":`反腐败委员会(CIAA)`, "trust.r4":`在线投诉门户`,
+    "fin.head":`加入你的声音。`, "fin.p":`加入只需一分钟,投票只在一瞬间。而改变,需要我们每一个人。`, "fin.cta1":`进入平台`, "fin.cta2":`看看正在推进什么`,
+    "foot.blurb":`<span class="deva" lang="ne">नेपाल बोल्छ</span> — 一个由尼泊尔人为尼泊尔人打造的公民平台,无论身在国内还是海外。你的声音,传回家乡。`,
+    "foot.col.platform":`平台`, "foot.col.learn":`了解`, "foot.col.join":`加入`,
+    "foot.l.browse":`浏览提案`, "foot.l.submit":`提交想法`, "foot.l.disc":`讨论`, "foot.l.report":`举报与联系`,
+    "foot.l.why":`我们为何创建`, "foot.l.how":`运作方式`, "foot.l.dia":`致海外同胞`, "foot.l.channels":`官方渠道`,
+    "foot.l.create":`创建账户`, "foot.l.signin":`登录`, "foot.l.share":`分享平台`,
+    "foot.note":`这是一项独立的公民倡议,与尼泊尔政府无关联,也未获其背书。官方电话和门户仅为方便提供——请始终在政府官网核实。`
+  },
+
+  "zh-Hant": {
+    "doc.title":`Nepal Speaks — 你的聲音,傳回家鄉`,
+    "nav.acts":`你能做什麼`, "nav.how":`運作方式`, "nav.props":`提案`, "nav.enter":`進入平台`,
+    "hero.head":`你的聲音,傳回家鄉。`,
+    "hero.sub":`一個公民平台,讓每一位尼泊爾人——無論身在村莊還是遠隔重洋——都能<b>提出想法、為重要議題投票、並推動真正的改變</b>。距離不該意味著沉默。`,
+    "hero.cta1":`加入你的聲音`, "hero.cta2":`了解為何重要`,
+    "ribbon.l1":`已發起提案`, "ribbon.l2":`已投票數`, "ribbon.l3":`參與公民`, "ribbon.l4":`覆蓋國家`,
+    "man.eye":`我們為何創建`,
+    "man.p1":`選舉時許下的承諾。始終沒有修好的路。遞交後石沉大海的投訴。長久以來,公民與政府之間只是一條單行道——而對於數百萬在海外務工的尼泊爾人來說,這條路幾乎完全封閉。`,
+    "man.p2":`Nepal Speaks 把零散的不滿,匯聚成<em>可計數的集體訴求</em>。忽視一個人很容易,但忽視一份提案上的一萬張選票卻不然。`,
+    "acts.eye":`你能做什麼`, "acts.title":`讓你被聽見的四種方式。`,
+    "acts.propose":`提議`, "acts.propose.d":`用樸實的話,說出你的社區需要的改變——一條路、一個衛生站、一所學校的網路。`, "acts.propose.go":`提交提案`,
+    "acts.vote":`投票`, "acts.vote.d":`為最重要的提案投上一票。數字就是力量——你的一票能把一個想法推上優先列表。`, "acts.vote.go":`瀏覽並投票`,
+    "acts.discuss":`討論`, "acts.discuss.d":`補充證據,分享當地實況,夯實理據——用尼泊爾語或英語。`, "acts.discuss.go":`加入討論`,
+    "acts.report":`舉報`, "acts.report.d":`把問題送到對的部門。找到對應的部會、熱線,以及正式投訴的具體步驟。`, "acts.report.go":`查找部門`,
+    "how.eye":`從想法到行動`, "how.title":`聲音如何化為改變。`, "how.lead":`五個步驟,無論你在 Jumla 還是日本,都一樣。`,
+    "how.s1.h":`驗證你與尼泊爾的關聯`, "how.s1.p":`註冊一次即可。你的身份保持私密——只顯示你的<span class="np" lang="ne">घर जिल्ला</span>(家鄉所在縣),讓每個聲音都根植於真實的地方。`,
+    "how.s2.h":`發起或支持提案`, "how.s2.p":`自己撰寫,或為正在推進的提案投票。每份提案都有所屬分類、省份,以及正在衝刺的目標票數。`,
+    "how.s3.h":`共同夯實理據`, "how.s3.p":`社群讓它愈發有力——討論、證據、來自國內外的親身經歷——直到無法被忽視。`,
+    "how.s4.h":`跨過門檻`, "how.s4.p":`當提案達到目標票數,它就會登上公共看板:一份排序清晰、無可否認的公民訴求記錄。`,
+    "how.s5.h":`送到主事者手中`, "how.s5.p":`把它帶給你的議員、你的<span class="np" lang="ne">पालिका</span>(地方政府)、媒體以及官方投訴渠道——背後有成千上萬人的分量。`,
+    "dia.eye":`同一個國家,跨越每個時區`, "dia.title":`雪梨的廚房,在家鄉村莊裡依然有一票。`,
+    "dia.lead":`超過兩百萬尼泊爾人在海外生活和工作,寄回支撐家庭的僑匯。他們對尼泊爾的牽掛從未離開。在這裡,它算數。`,
+    "dia.big.sub":`個國家,同一種聲音`,
+    "dia.q1":`「我們每月往家裡寄錢。政府至少可以為我們孩子的學校投資。」`,
+    "dia.q2":`「我家還在 Bara 務農。有機補貼能幫助千千萬萬像我這樣的家庭生存下去。」`,
+    "dia.q3":`「巴格馬蒂曾是聖河,如今卻成了下水道。即使身在東京,我依然能為它的清理出力。」`,
+    "live.eye":`正在推進`, "live.title":`正在衝向目標的提案。`, "live.seeall":`查看全部 2,847 項`,
+    "live.t1":`環境`, "live.h1":`清理巴格馬蒂河——六個月行動計畫`,
+    "live.t2":`治理`, "live.h2":`讓每個基建項目的採購都無腐敗`, "live.m2":`全國——尼泊爾全境`,
+    "live.t3":`基礎設施`, "live.h3":`從 Lamkichuha 到 Mothipur 的柏油路`,
+    "live.v1b":`21,400 票`, "live.v1s":`目標 25,000`,
+    "live.v2b":`18,200 票`, "live.v2s":`目標 20,000`,
+    "live.v3b":`12,840 票`, "live.v3s":`目標 15,000`,
+    "trust.eye":`不止於空談`, "trust.title":`真正的渠道,集於一處。`,
+    "trust.p":`投票形成壓力——但我們也為你提供正式的行動途徑:免費申訴熱線、反貪委員會,以及附有可用電話和投訴入口的各部會名錄。`,
+    "trust.cta":`打開名錄`,
+    "trust.r1":`全國申訴熱線 · 免費`, "trust.r2":`衛生求助熱線`, "trust.r3":`反貪委員會(CIAA)`, "trust.r4":`線上投訴入口`,
+    "fin.head":`加入你的聲音。`, "fin.p":`加入只需一分鐘,投票只在一瞬間。而改變,需要我們每一個人。`, "fin.cta1":`進入平台`, "fin.cta2":`看看正在推進什麼`,
+    "foot.blurb":`<span class="deva" lang="ne">नेपाल बोल्छ</span> — 一個由尼泊爾人為尼泊爾人打造的公民平台,無論身在國內還是海外。你的聲音,傳回家鄉。`,
+    "foot.col.platform":`平台`, "foot.col.learn":`了解`, "foot.col.join":`加入`,
+    "foot.l.browse":`瀏覽提案`, "foot.l.submit":`提交想法`, "foot.l.disc":`討論`, "foot.l.report":`舉報與聯絡`,
+    "foot.l.why":`我們為何創建`, "foot.l.how":`運作方式`, "foot.l.dia":`致海外同胞`, "foot.l.channels":`官方渠道`,
+    "foot.l.create":`建立帳戶`, "foot.l.signin":`登入`, "foot.l.share":`分享平台`,
+    "foot.note":`這是一項獨立的公民倡議,與尼泊爾政府無關聯,也未獲其背書。官方電話和入口僅為方便提供——請始終在政府官網核實。`
+  }
+};
+
+const LANG_NAMES = { en:"English", ne:"नेपाली", "zh-Hans":"简体中文", "zh-Hant":"繁體中文" };
+
+/* storage wrapped so a sandboxed preview can't crash the page */
+function saveLang(v){ try{ localStorage.setItem("ns-lang", v); }catch(e){} }
+function readLang(){ try{ return localStorage.getItem("ns-lang"); }catch(e){ return null; } }
+
+function applyLang(lang){
+  const dict = I18N[lang] || I18N.en;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const v = dict[el.getAttribute("data-i18n")]; if(v!=null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const v = dict[el.getAttribute("data-i18n-html")]; if(v!=null) el.innerHTML = v;
+  });
+  document.getElementById("html-root").setAttribute("lang", lang);
+  document.getElementById("lang-current").textContent = LANG_NAMES[lang] || "English";
+  document.querySelectorAll("[data-lang]").forEach(b=>{
+    b.setAttribute("aria-checked", b.dataset.lang===lang ? "true" : "false");
+  });
+  if(dict["doc.title"]) document.title = dict["doc.title"];
+  saveLang(lang);
+}
+
+/* pick initial language: saved choice → browser language → English */
+(function(){
+  let lang = readLang();
+  if(!I18N[lang]){
+    const n = (navigator.language || "en").toLowerCase();
+    if(n.startsWith("ne")) lang = "ne";
+    else if(n.startsWith("zh")) lang = (n.includes("hant")||n.includes("tw")||n.includes("hk")||n.includes("mo")) ? "zh-Hant" : "zh-Hans";
+    else lang = "en";
+  }
+  applyLang(lang);
+})();
+
+/* dropdown behaviour */
+const langWrap = document.getElementById("lang");
+const langBtn  = document.getElementById("lang-btn");
+function closeLang(){ langWrap.classList.remove("open"); langBtn.setAttribute("aria-expanded","false"); }
+langBtn.addEventListener("click", e=>{
+  e.stopPropagation();
+  const open = langWrap.classList.toggle("open");
+  langBtn.setAttribute("aria-expanded", open ? "true" : "false");
+});
+document.querySelectorAll("[data-lang]").forEach(b=>{
+  b.addEventListener("click", ()=>{ applyLang(b.dataset.lang); closeLang(); langBtn.focus(); });
+});
+document.addEventListener("click", e=>{ if(!langWrap.contains(e.target)) closeLang(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLang(); });
+
+/* Header solidifies after the hero crest */
+const head = document.getElementById("head");
+const onScroll = ()=> head.classList.toggle("solid", window.scrollY > 40);
+onScroll(); window.addEventListener("scroll", onScroll, { passive:true });
+
+/* Stars (skipped under reduced motion) */
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const starbox = document.getElementById("stars");
+if(starbox && !reduce){
+  const n = window.innerWidth < 640 ? 40 : 70;
+  let html = "";
+  for(let i=0;i<n;i++){
+    const x=Math.random()*100, y=Math.random()*62;
+    const o=(0.25+Math.random()*0.6).toFixed(2), d=(Math.random()*1.6).toFixed(2);
+    const s=Math.random()<0.18?3:2;
+    html += `<span class="star" style="left:${x}%;top:${y}%;width:${s}px;height:${s}px;--o:${o};animation-delay:${d}s"></span>`;
+  }
+  starbox.innerHTML = html;
+}
+
+/* Scroll reveals (fail-safe) */
+const reveals = document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); obs.unobserve(en.target); } });
+  }, { threshold:0.12, rootMargin:"0px 0px -8% 0px" });
+  reveals.forEach(el=>obs.observe(el));
+} else {
+  reveals.forEach(el=>el.classList.add("in"));
+}
+</script>
+</body>
+</html>
